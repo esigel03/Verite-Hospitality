@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérité Hospitality - Luxury Hotel Mystery Shopping & Quality Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0A1628;
+            --deep-navy: #050B14;
+            --gold: #C9A063;
+            --gold-light: #D4B17A;
+            --cream: #F8F6F1;
+            --cream-dark: #E8E4DB;
+            --silver: #A8B2BC;
+            --accent: #8B6F47;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--navy);
+            background: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(201, 160, 99, 0.2);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, var(--navy) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(201, 160, 99, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(201, 160, 99, 0.08) 0%, transparent 50%);
+            animation: shimmer 15s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: fadeInUp 1.2s ease-out 0.2s backwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            animation: fadeInUp 1.2s ease-out 0.4s backwards;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--silver);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1.2s ease-out 0.6s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.2s ease-out 0.8s backwards;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 160, 99, 0.3);
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            background: var(--navy);
+            padding: 2rem 3rem;
+            border-top: 1px solid rgba(201, 160, 99, 0.2);
+            border-bottom: 1px solid rgba(201, 160, 99, 0.2);
+        }
+
+        .trust-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .trust-item {
+            text-align: center;
+            color: var(--cream);
+        }
+
+        .trust-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--silver);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 3rem;
+            background: var(--cream);
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--accent);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Service Tiers */
+        .service-tiers {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .tier-card {
+            background: white;
+            border: 2px solid var(--cream-dark);
+            padding: 3rem 2.5rem;
+            position: relative;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .tier-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--accent) 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .tier-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .tier-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(10, 22, 40, 0.15);
+            border-color: var(--gold);
+        }
+
+        .tier-card.featured {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--deep-navy) 100%);
+            border: 2px solid var(--gold);
+            transform: scale(1.05);
+        }
+
+        .tier-card.featured .tier-name,
+        .tier-card.featured .tier-price,
+        .tier-card.featured .tier-description,
+        .tier-card.featured .feature-item {
+            color: var(--cream);
+        }
+
+        .tier-card.featured .tier-badge {
+            color: var(--gold);
+        }
+
+        .tier-badge {
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tier-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .tier-price {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .tier-description {
+            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-item {
+            padding: 0.8rem 0;
+            color: var(--navy);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .feature-item::before {
+            content: '◆';
+            color: var(--gold);
+            font-size: 0.7rem;
+            margin-top: 0.3rem;
+        }
+
+        .tier-cta {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tier-cta:hover {
+            background: var(--gold);
+            color: var(--cream);
+        }
+
+        .tier-card.featured .tier-cta {
+            background: var(--gold);
+            color: var(--navy);
+            border-color: var(--gold);
+        }
+
+        .tier-card.featured .tier-cta:hover {
+            background: var(--gold-light);
+        }
+
+        /* Why Choose Section */
+        .why-choose {
+            padding: 8rem 3rem;
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-choose::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201, 160, 99, 0.1) 0%, transparent 70%);
+        }
+
+        .why-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .why-choose .section-title {
+            color: var(--gold);
+        }
+
+        .why-choose .section-description {
+            color: var(--silver);
+        }
+
+        .differentiators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .diff-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .diff-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--cream);
+        }
+
+        .diff-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .diff-description {
+            color: var(--silver);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            padding: 8rem 3rem;
+            background: linear-gradient(135deg, var(--deep-navy) 0%, var(--navy) 100%);
+            text-align: center;
+        }
+
+        .final-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            color: var(--silver);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-navy);
+            padding: 3rem 3rem 2rem;
+            border-top: 1px solid rgba(201, 160, 99, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-tagline {
+            color: var(--silver);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--silver);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(201, 160, 99, 0.1);
+            color: var(--silver);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .service-tiers {
+                grid-template-columns: 1fr;
+            }
+
+            .tier-card.featured {
+                transform: scale(1);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Vérité Hospitality</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#why">Why Vérité</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">Luxury Hotel Quality Assessment</div>
+            <h1>Uncompromising Truth.<br>Unmatched Excellence.</h1>
+            <p class="hero-description">
+                Elite mystery shopping services designed for luxury hotel brands who demand authentic insights 
+                and measurable improvements in guest experience.
+            </p>
+            <a href="#services" class="cta-button">Explore Our Services</a>
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-content">
+            <div class="trust-item">
+                <div class="trust-number">◆</div>
+                <div class="trust-label">Former Luxury Hotel Executives</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-number">◆</div>
+                <div class="trust-label">Forbes & AAA Trained Standards</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-number">◆</div>
+                <div class="trust-label">Absolute Confidentiality</div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-number">◆</div>
+                <div class="trust-label">24-48hr Report Delivery</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-container">
+            <div class="section-header">
+                <div class="section-subtitle">Tailored Assessment Programs</div>
+                <h2 class="section-title">Choose Your Partnership</h2>
+                <p class="section-description">
+                    Three distinct evaluation tiers designed to meet your brand's unique quality assurance needs, 
+                    from foundational insights to comprehensive strategic intelligence.
+                </p>
+            </div>
+
+            <div class="service-tiers">
+                <!-- Essential Tier -->
+                <div class="tier-card">
+                    <div class="tier-badge">Foundation</div>
+                    <h3 class="tier-name">Essential</h3>
+                    <div class="tier-price">Starting at $495 per evaluation</div>
+                    <p class="tier-description">
+                        Comprehensive overnight mystery stay with focused assessment of core guest touchpoints 
+                        and operational excellence.
+                    </p>
+                    <ul class="features-list">
+                        <li class="feature-item">Overnight mystery stay evaluation</li>
+                        <li class="feature-item">Check-in/check-out experience assessment</li>
+                        <li class="feature-item">Room quality & housekeeping standards</li>
+                        <li class="feature-item">Basic amenities evaluation</li>
+                        <li class="feature-item">Guest services interaction review</li>
+                        <li class="feature-item">Detailed narrative report (15-20 pages)</li>
+                        <li class="feature-item">Photo documentation</li>
+                        <li class="feature-item">Scored metrics across 40+ criteria</li>
+                        <li class="feature-item">24-48 hour report delivery</li>
+                    </ul>
+                    <a href="#contact" class="tier-cta">Request Proposal</a>
+                </div>
+
+                <!-- Premium Tier (Featured) -->
+                <div class="tier-card featured">
+                    <div class="tier-badge">Most Popular</div>
+                    <h3 class="tier-name">Premium</h3>
+                    <div class="tier-price">Starting at $895 per evaluation</div>
+                    <p class="tier-description">
+                        In-depth multi-touchpoint evaluation including dining, spa, and concierge services with 
+                        competitive benchmarking and actionable recommendations.
+                    </p>
+                    <ul class="features-list">
+                        <li class="feature-item">Everything in Essential, plus:</li>
+                        <li class="feature-item">Restaurant & bar service evaluation</li>
+                        <li class="feature-item">Spa/wellness facility assessment (if applicable)</li>
+                        <li class="feature-item">Concierge service testing (3+ requests)</li>
+                        <li class="feature-item">Technology & digital experience review</li>
+                        <li class="feature-item">Staff engagement & emotional intelligence scoring</li>
+                        <li class="feature-item">Comprehensive narrative report (25-35 pages)</li>
+                        <li class="feature-item">Video documentation option</li>
+                        <li class="feature-item">Competitive benchmarking (vs. 3 competitors)</li>
+                        <li class="feature-item">Priority recommendations & action plan</li>
+                        <li class="feature-item">Quarterly trend analysis (with ongoing partnership)</li>
+                    </ul>
+                    <a href="#contact" class="tier-cta">Get Started</a>
+                </div>
+
+                <!-- Prestige Tier -->
+                <div class="tier-card">
+                    <div class="tier-badge">Elite</div>
+                    <h3 class="tier-name">Prestige</h3>
+                    <div class="tier-price">Custom pricing - Starting at $1,795</div>
+                    <p class="tier-description">
+                        White-glove, fully customized evaluation program with executive briefings, competitive 
+                        intelligence, and strategic consulting for luxury brands.
+                    </p>
+                    <ul class="features-list">
+                        <li class="feature-item">Everything in Premium, plus:</li>
+                        <li class="feature-item">Multi-day extended stay evaluation</li>
+                        <li class="feature-item">Custom evaluation criteria design</li>
+                        <li class="feature-item">VIP guest journey simulation</li>
+                        <li class="feature-item">Event/meeting space assessment</li>
+                        <li class="feature-item">Full F&B program evaluation (all outlets)</li>
+                        <li class="feature-item">Executive summary with strategic insights (40+ pages)</li>
+                        <li class="feature-item">Video mystery shopping with analysis</li>
+                        <li class="feature-item">Competitive deep-dive intelligence report</li>
+                        <li class="feature-item">Post-evaluation executive briefing (virtual or in-person)</li>
+                        <li class="feature-item">90-day follow-up consultation</li>
+                        <li class="feature-item">Dedicated account manager</li>
+                    </ul>
+                    <a href="#contact" class="tier-cta">Schedule Consultation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose" id="why">
+        <div class="why-container">
+            <div class="section-header">
+                <div class="section-subtitle">The Vérité Difference</div>
+                <h2 class="section-title">Why Leading Luxury Brands Choose Us</h2>
+                <p class="section-description">
+                    We don't just measure service—we decode the art of hospitality with the precision 
+                    of industry insiders and the objectivity of outside observers.
+                </p>
+            </div>
+
+            <div class="differentiators">
+                <div class="diff-card">
+                    <div class="diff-icon">◆</div>
+                    <h3 class="diff-title">Hospitality Expertise</h3>
+                    <p class="diff-description">
+                        Our evaluators are former luxury hotel executives, award-winning hospitality professionals, 
+                        and trained quality assessors who understand the nuances of five-star service.
+                    </p>
+                </div>
+
+                <div class="diff-card">
+                    <div class="diff-icon">◆</div>
+                    <h3 class="diff-title">Authentic Insights</h3>
+                    <p class="diff-description">
+                        We provide narrative-rich, emotionally intelligent feedback that captures not just what 
+                        happened, but how it made your guests feel—the essence of luxury hospitality.
+                    </p>
+                </div>
+
+                <div class="diff-card">
+                    <div class="diff-icon">◆</div>
+                    <h3 class="diff-title">Actionable Intelligence</h3>
+                    <p class="diff-description">
+                        Every report includes prioritized recommendations, competitive benchmarks, and strategic 
+                        insights that drive measurable improvements in guest satisfaction and revenue.
+                    </p>
+                </div>
+
+                <div class="diff-card">
+                    <div class="diff-icon">◆</div>
+                    <h3 class="diff-title">Uncompromising Standards</h3>
+                    <p class="diff-description">
+                        We evaluate against Forbes Five-Star, AAA Five-Diamond, and proprietary luxury hospitality 
+                        benchmarks—ensuring your property meets the highest industry standards.
+                    </p>
+                </div>
+
+                <div class="diff-card">
+                    <div class="diff-icon">◆</div>
+                    <h3 class="diff-title">Rapid Turnaround</h3>
+                    <p class="diff-description">
+                        Receive comprehensive, professionally formatted reports within 24-48 hours—allowing you 
+                        to address issues and capitalize on opportunities in real-time.
+                    </p>
+                </div>
+
+                <div class="diff-card">
+                    <div class="diff-icon">◆</div>
+                    <h3 class="diff-title">Confidential Partnership</h3>
+                    <p class="diff-description">
+                        Absolute discretion guaranteed. Our evaluators maintain complete anonymity, and all reports 
+                        are delivered securely to your designated stakeholders only.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" id="contact">
+        <div class="final-cta-content">
+            <h2>Elevate Your Guest Experience</h2>
+            <p>
+                Partner with Vérité Hospitality to gain the authentic insights and strategic intelligence 
+                your luxury brand deserves. Review our service tiers to find the perfect fit for your property.
+            </p>
+            <a href="#services" class="cta-button">View Service Tiers</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Vérité Hospitality</div>
+                <p class="footer-tagline">
+                    Uncompromising truth. Unmatched excellence. Elevating luxury hospitality 
+                    through authentic mystery shopping and quality assessment services.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Essential</a></li>
+                    <li><a href="#services">Premium</a></li>
+                    <li><a href="#services">Prestige</a></li>
+                    <li><a href="#why">Why Vérité</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#evaluators">Our Evaluators</a></li>
+                    <li><a href="#case-studies">Case Studies</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="#contact">Get In Touch</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Vérité Hospitality. All rights reserved. Elevating luxury hospitality worldwide.</p>
+            <p style="margin-top: 1rem; font-size: 0.75rem; opacity: 0.5;"><a href="employee-portal.html" style="color: var(--silver); text-decoration: none;">Employee Portal</a></p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Add scroll animation for cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.que
