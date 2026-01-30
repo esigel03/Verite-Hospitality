@@ -1,1 +1,0 @@
-# Verite-Hospitality
