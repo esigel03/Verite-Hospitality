@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vérité Platform - Technology-enabled hotel quality assurance. Forbes-level standards at a fraction of the cost.">
+    <title>Vérité Platform - Hotel Quality Assurance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0A0F0D;
+            --dark-green: #1A2F23;
+            --accent-green: #3D7C5B;
+            --bright-green: #52D477;
+            --cream: #F7F3ED;
+            --light-gray: #E5E1D8;
+            --text-gray: #6B7772;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: var(--cream);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(247, 243, 237, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--light-gray);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--black);
+            cursor: pointer;
+        }
+
+        .logo-accent {
+            color: var(--accent-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .nav-cta {
+            background: var(--accent-green);
+            color: white !important;
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+        }
+
+        .hero {
+            padding: 10rem 3rem 6rem;
+            background: linear-gradient(135deg, var(--cream) 0%, #E8E4D5 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+        }
+
+        .hero-highlight {
+            color: var(--accent-green);
+        }
+
+        .btn {
+            padding: 1.1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-block;
+            cursor: pointer;
+            border: 2px solid var(--black);
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--black);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--black);
+            margin-left: 1rem;
+        }
+
+        .stats {
+            background: var(--dark-green);
+            padding: 3rem;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            color: var(--bright-green);
+            font-weight: 700;
+        }
+
+        .stat p {
+            color: var(--cream);
+        }
+
+        section {
+            padding: 8rem 3rem;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .step-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+        }
+
+        .dashboard {
+            background: var(--black);
+            color: white;
+        }
+
+        .dashboard-mockup {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .score-main {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--bright-green);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            padding: 2.5rem;
+        }
+
+        .pricing-card.featured {
+            background: var(--dark-green);
+            color: white;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.7rem 0;
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 6px;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .form-success {
+            display: none;
+            background: var(--bright-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: var(--black);
+            padding: 4rem 3rem 2rem;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .process-grid,
+            .pricing-grid,
+            .stats-grid,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+                VÉRITÉ<span class="logo-accent">//</span>
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="scrollTo('how-it-works')">How It Works</a></li>
+                <li><a onclick="scrollTo('dashboard')">Dashboard</a></li>
+                <li><a onclick="scrollTo('pricing')">Pricing</a></li>
+                <li><a onclick="scrollTo('contact')" class="nav-cta">Get Started</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Forbes-Level Quality Assurance, <span class="hero-highlight">Without the Forbes Price Tag</span></h1>
+            <p style="font-size:1.3rem;color:var(--text-gray);max-width:700px;margin:2rem 0 3rem">
+                Technology-enabled hotel mystery shopping with real-time dashboards and automated reporting.
+            </p>
+            <a class="btn btn-primary" onclick="scrollTo('dashboard')">See Live Dashboard</a>
+            <a class="btn btn-secondary" onclick="scrollTo('pricing')">View Pricing</a>
+        </div>
+    </section>
+
+    <div class="stats">
+        <div class="stats-grid">
+            <div class="stat">
+                <h3>$495</h3>
+                <p>Starting price</p>
+            </div>
+            <div class="stat">
+                <h3>24-48h</h3>
+                <p>Report delivery</p>
+            </div>
+            <div class="stat">
+                <h3>100%</h3>
+                <p>Automated</p>
+            </div>
+            <div class="stat">
+                <h3>900+</h3>
+                <p>Quality criteria</p>
+            </div>
+        </div>
+    </div>
+
+    <section style="background:white" id="how-it-works">
+        <div class="section-content">
+            <h2>Set It and Forget It Quality Monitoring</h2>
+            <div class="process-grid">
+                <div>
+                    <div class="step-number">01</div>
+                    <h3>Quick Setup</h3>
+                    <p style="color:var(--text-gray)">15-minute onboarding. Configure criteria and frequency.</p>
+                </div>
+                <div>
+                    <div class="step-number">02</div>
+                    <h3>Auto-Assigned</h3>
+                    <p style="color:var(--text-gray)">System assigns qualified evaluators automatically.</p>
+                </div>
+                <div>
+                    <div class="step-number">03</div>
+                    <h3>Mystery Visit</h3>
+                    <p style="color:var(--text-gray)">Evaluator completes stay with digital checklist.</p>
+                </div>
+                <div>
+                    <div class="step-number">04</div>
+                    <h3>Dashboard Updated</h3>
+                    <p style="color:var(--text-gray)">Report appears in dashboard within 48 hours.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dashboard" id="dashboard">
+        <div class="section-content">
+            <h2>Your Quality Command Center</h2>
+            <p style="font-size:1.2rem;color:rgba(255,255,255,0.7);margin-bottom:2rem">No PDFs, no emails—just live data.</p>
+            <div class="dashboard-mockup">
+                <div style="padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2rem">
+                    <div style="font-family:'Space Mono',monospace;opacity:0.7">QUALITY DASHBOARD</div>
+                </div>
+                <div style="background:rgba(82,212,119,0.1);border:2px solid var(--bright-green);border-radius:8px;padding:2rem;margin-bottom:2rem">
+                    <div class="score-main">92<span style="font-size:2rem;opacity:0.6">/100</span></div>
+                    <div style="margin-top:0.5rem;color:var(--bright-green)">↑ +3 points from last month</div>
+                </div>
+                <a class="btn" style="background:var(--bright-green);color:var(--black);margin-top:2rem" onclick="scrollTo('contact')">Schedule Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <div class="section-content">
+            <h2>Choose Your Evaluation Tier</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Essential</h3>
+                    <div class="pricing-price">$495</div>
+                    <ul class="pricing-features">
+                        <li>Overnight mystery stay</li>
+                        <li>40+ criteria</li>
+                        <li>Dashboard access</li>
+                        <li>15-20 page report</li>
+                    </ul>
+                    <button class="pricing-btn" onclick="scrollTo('contact')">Get Started</button>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Premium</h3>
+                    <div class="pricing-price">$895</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Essential</li>
+                        <li>F&B evaluation</li>
+                        <li>Concierge testing</li>
+                        <li>Competitive benchmarking</li>
+                    </ul>
+                    <button class="pricing-btn" onclick="scrollTo('contact')" style="background:var(--bright-green);color:var(--black)">Get Started</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Prestige</h3>
+                    <div class="pricing-price">$1,795</div>
+                    <ul class="pricing-features">
+                        <li>Everything in Premium</li>
+                        <li>Multi-day evaluation</li>
+                        <li>Executive briefing</li>
+                        <li>Dedicated manager</li>
+                    </ul>
+                    <button class="pricing-btn" onclick="scrollTo('contact')">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background:white" id="contact">
+        <div class="section-content">
+            <h2>Schedule Your Demo</h2>
+            <form class="contact-form" onsubmit="return handleSubmit(event)">
+                <div class="form-success" id="successMsg">✓ Thank you! We'll be in touch within 24 hours.</div>
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>Property Name *</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Schedule Demo</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div style="font-family:'Space Mono',monospace;font-size:1.4rem;font-weight:700;margin-bottom:1rem">VÉRITÉ//</div>
+                <p style="color:rgba(255,255,255,0.6)">Technology-enabled hotel quality assurance.</p>
+            </div>
+            <div>
+                <ul class="footer-links">
+                    <li><a onclick="scrollTo('how-it-works')">How It Works</a></li>
+                    <li><a onclick="scrollTo('dashboard')">Dashboard</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="footer-links">
+                    <li><a onclick="scrollTo('pricing')">Pricing</a></li>
+                    <li><a onclick="scrollTo('contact')">Get Started</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="footer-links">
+                    <li><a onclick="window.scrollTo({top:0,behavior:'smooth'})">About</a></li>
+                    <li><a onclick="scrollTo('contact')">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.5)">
+            <p>&copy; 2026 Vérité Platform</p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollTo(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const navHeight = 70;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+                window.scrollTo({top: offsetPosition, behavior: 'smooth'});
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            document.getElementById('successMsg').style.display = 'block';
+            event.target.reset();
+            setTimeout(() => {
+                document.getElementById('successMsg').style.display = 'none';
+            }, 5000);
+            return false;
+        }
+    </script>
+</body>
+</html>
